@@ -1,0 +1,214 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+//import java.net.URL;
+
+public class GUI extends JComponent implements MouseMotionListener, MouseListener {
+
+	/**
+	 * Variables for the GUI Class
+	 * Sets the X and Y for the images
+	 * Sets up Images
+	 * Set up buildings and people in the city
+	 */
+	int backgroundX, backgroundY, kidX = 50, kidY = 50, teacherX = 50, teacherY = 350, policeX = 800, policeY = 600, dragged = 0;
+	Image image1, image2, image3, image4, image5, image6, image7;
+	
+	//people and buildings
+	Person[] people = {new Kid("KitKat", "Phil", 5, "0"), new Teacher("Computer Science", 20, "Pete Tucker", 
+			45, "4567891"),new Police(Police.Role.Captain,"Frank", 48, "1234567")};
+	Building[] buildings = {new School("Whitworth University", "300 W Hawthorne"), new CityHall("Pioneer Place", "Portland, OR")};
+	//to store the names
+	
+	
+	
+	/**
+	 * Constructor for GUI
+	 * Sets up images
+	 */
+	public GUI(Image a, Image b, Image c, Image d, Image mouse, Image f, Image g){
+		image1 = a;
+		image2 = b;
+		image3 = c;
+		image4 = d;
+		image5 = mouse;
+		image6 = f;
+		image7 = g;
+		addMouseMotionListener(this);
+		addMouseListener(this);
+	}
+	
+	
+	public void mouseEntered(MouseEvent mouse){
+		 
+	}
+	public void mouseExited(MouseEvent mouse){
+		 
+	}
+	
+	/**
+     * Function for mouse click/dragging
+     */
+    public void mousePressed(MouseEvent mouse)
+    {
+    	if (mouse.getX() >= policeX && mouse.getX() <= policeX + 100 && mouse.getY()>= policeY && mouse.getY() <= policeY +100)
+    	{
+			dragged = 1;
+    	}
+		else if (mouse.getX() >= teacherX && mouse.getX() <= teacherX + 100 && mouse.getY()>= teacherY && mouse.getY() <= teacherY +100)
+		{
+			dragged = 2;
+		}
+		else if (mouse.getX() >= kidX && mouse.getX() <= kidX + 100 && mouse.getY()>= kidY && mouse.getY() <= kidY +100)
+		{
+			dragged = 3;
+		}
+    }
+    
+    public void mouseReleased(MouseEvent mouse)
+    {
+    	dragged = 0;
+    }
+	
+    
+    /**
+     * This is where The information for if the mouse is clicked on a person is handled. 
+     * The Show occupants does not entirely work.
+     */
+    public void mouseClicked(MouseEvent mouse)
+    {
+    	if(mouse.getY() > 400 && mouse.getY() < 600 && mouse.getX() >700 && mouse.getX()<900){
+			System.out.printf("%s,%s\n", buildings[1].getName(),buildings[1].getAddress());
+		}
+		
+		else if (mouse.getY() > 0 && mouse.getY() < 150 && mouse.getX() > 350 && mouse.getX() < 500)
+		{
+			System.out.printf("%s,%s\n",buildings[0].getName(),buildings[0].getAddress());
+		}
+		else if (mouse.getX() > kidX && mouse.getX()< kidX +100 && mouse.getY() > kidY && mouse.getY() < kidY +100){
+			System.out.printf("%s\n",people[2].getName());
+		}
+		else if (mouse.getX()> policeX && mouse.getX() < policeX +100 && mouse.getY() > policeY && mouse.getY() < policeY+100){
+			Police p1=(Police) people[1];
+			System.out.printf("%s\n", people[1].getName());
+		}
+		else if (mouse.getX()>teacherX && mouse.getX() < teacherX +100 && mouse.getY() > teacherY && mouse.getY() < teacherY +100){
+			System.out.printf("%s\n", people[0].getName());
+		}
+    	
+    }
+    
+    
+    public void mouseDragged(MouseEvent e) {
+    	if (dragged == 0) {
+    		if (e.getX() >= policeX && e.getX() <= policeX + 75 && e.getY() >= policeY && e.getY() <= policeY+100)
+    		{
+    			dragged = 1;
+    		}
+    		else if(e.getX() >= teacherX && e.getX() <= teacherX + 150 && e.getY() >= teacherY && e.getY() <= teacherY + 100)
+    		{
+    			dragged = 2;
+    		}
+    		else if (e.getX() >= kidX && e.getX() <= kidX + 100 && e.getY() >= kidY && e.getY() <= kidY + 125)
+    		{
+    			dragged = 3;
+    		}
+    	}
+    	if (dragged == 1) {
+	      policeX = e.getX();
+	      policeY = e.getY();
+    	}
+    	else if (dragged == 2)
+    	{
+    	teacherX = e.getX();
+      	teacherY = e.getY();
+    	}
+    	else if (dragged == 3)
+    	{
+    	kidX = e.getX();
+    	kidY = e.getY();
+    	}
+      repaint();
+    }
+    
+    
+    
+    
+    public void mouseMoved(MouseEvent e) {}
+    
+    /**
+     * Create a paint function to make images appear.
+     */
+    public void paint(Graphics g) {
+      Graphics2D g2 = (Graphics2D)g;
+      g2.drawImage(image1, 0, 0, this);
+      g2.drawImage(image2, 100, 60, this);
+      g2.drawImage(image3, 450, 150, this);
+      g2.drawImage(image4, 875, 30, this);
+      g2.drawImage(image5, policeX, policeY, this);
+      g2.drawImage(image6, teacherX, teacherY, this);
+      g2.drawImage(image7, kidX, kidY, this);
+    }
+    
+    
+    
+    
+    
+    
+    
+    /**
+     * main 
+     * @param args
+     */
+    public static void main(String[] args) {
+    	 
+    	/**
+    	 * get images 
+    	 */
+    	String city = "/Pictures/City.jpg";
+    	String police = "/Pictures/Police.jpg";
+    	String school = "/Pictures/School.jpg";
+    	String cityHall = "/Pictures/CityHall.jpeg";
+    	String jail = "/Pictures/PoliceStation.jpg";
+    	String teacher = "/Pictures/Teacher.jpg";
+    	String kid = "/Pictures/Kid.jpg";
+    	
+    	
+    	/**
+         * Put pictures in the UI
+         */
+        Image image1 = Toolkit.getDefaultToolkit().getImage(GUI.class.getResource(city));
+        
+        Image image2 = Toolkit.getDefaultToolkit().getImage(GUI.class.getResource(jail));
+        image2 = image2.getScaledInstance(200,200,Image.SCALE_DEFAULT);
+        
+        Image image3 = Toolkit.getDefaultToolkit().getImage(GUI.class.getResource(school));
+        image3 = image3.getScaledInstance(350, 400, Image.SCALE_SMOOTH);
+        
+        Image image4 = Toolkit.getDefaultToolkit().getImage(GUI.class.getResource(cityHall));
+        image4 = image4.getScaledInstance(200,200,Image.SCALE_DEFAULT);
+        
+        Image image5 = Toolkit.getDefaultToolkit().getImage(GUI.class.getResource(police));
+        image5 = image5.getScaledInstance(75, 100, Image.SCALE_SMOOTH);
+        
+        Image image6 = Toolkit.getDefaultToolkit().getImage(GUI.class.getResource(teacher));
+        image6 = image6.getScaledInstance(150, 100, Image.SCALE_SMOOTH);
+        
+        Image image7 = Toolkit.getDefaultToolkit().getImage(GUI.class.getResource(kid));
+        image7 = image7.getScaledInstance(100, 125, Image.SCALE_SMOOTH);
+      
+        
+        
+        
+        
+        /**
+         * Create the JFrame
+         */
+        JFrame frame = new JFrame("Simville");
+        frame.add( new GUI(image2, image1, image3, image4, image5, image6, image7) );
+        frame.setSize(1400, 1000);
+        frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+        frame.setVisible(true);
+     }
+
+ }

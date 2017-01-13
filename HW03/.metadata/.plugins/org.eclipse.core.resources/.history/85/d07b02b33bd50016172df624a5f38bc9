@@ -1,0 +1,23 @@
+import java.util.Random;
+
+
+public class CityTest{
+
+	public static void main(String[] args) {
+		Person[] people = {new Kid(), new Police(), new Teacher(), new Kid(), new Police(), new Teacher()};
+		Building[] structures = {new CityHall(), new School()};
+		
+		//Random rnd = new Random();
+		
+		
+		
+		for (int i=0; i<people.length; i++){ //for loop to display people
+			System.out.printf(people[i].name+"\n");	
+		}
+		for (int i=0; i<structures.length; i++){ //for loop to display buildings names
+			System.out.printf(structures[i].name+"\n");	
+		}
+
+	}
+
+}

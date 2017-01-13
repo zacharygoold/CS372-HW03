@@ -1,0 +1,18 @@
+import java.util.ArrayList;
+
+public class CityHall extends Building {
+	ArrayList<Police> CityHall = new ArrayList();
+	
+	public CityHall(String name, String address){
+		name = getName();
+		address = getAddress();
+	}
+	
+	public void addPolice(){
+		for (int i = 0; i < CityHall.size(); i++){
+			Police a = new Police();
+			CityHall.add(a);
+		}
+	}
+	
+}

@@ -1,0 +1,39 @@
+
+public class Teacher extends Person implements Employee{
+	
+	//VARIABLES
+	public int gradeLevel;
+	public String certification;
+	
+	
+	//CONSTRUCTORS
+	public Teacher(){
+		gradeLevel = 0;
+		certification = null;
+	}
+	public Teacher(String cert, int grade, String name, int age, String phoneNumber){
+		gradeLevel = grade;
+		certification = cert;
+		name = getName();
+		age = getAge();
+		phoneNumber = getPhoneNumber();
+		
+	}
+	
+	//SET FUNCTIONS
+	public void setGrade(double grade){
+		gradeLevel = grade;
+	}
+	public void setCert(String cert){
+		certification = cert;
+	}
+	
+	//GET FUNCTIONS
+	public String getCert(){
+		return certification;
+	}
+	public double getGrade(){
+		return gradeLevel;
+	}
+
+}

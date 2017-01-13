@@ -1,0 +1,4 @@
+
+public class CityHall extends Building {
+	boolean inHall;
+}

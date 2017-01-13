@@ -1,0 +1,25 @@
+import java.util.ArrayList;
+
+/**
+ * This models a School
+ * School is a building
+ * Here you have an array of what kids are in school
+ * @author zgoold17
+ *
+ */
+
+public class School extends Building {
+	ArrayList<Person> SchoolPeople = new ArrayList(); // keeps track of people in school
+	
+	public School(String name, String address){
+		setName(name);
+		setAddress(address);
+	}	
+	
+	public void peopleInside(){
+		System.out.printf("The people inside are: ");
+		for (Person p : SchoolPeople){
+			System.out.printf("\n", p);
+		}
+	}
+}

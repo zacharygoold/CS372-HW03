@@ -1,0 +1,15 @@
+
+public interface Employee {
+	
+	
+//	double employeeID = 0, pay =0;
+	
+	public void setID(double ID);
+	public void setPay(double pay);
+	public void getID(double ID);
+	public void getPay(double pay);
+	
+	
+	
+	
+}
